@@ -13,16 +13,23 @@
 <body>
     <div class="container" style="display:none">
         <p>
-            Kopiere den Link dieser Seite und aktiviere die Checkbox.
-            Über den kopierten Link wirst du dann automatisch zum ausgefüllten Formular weitergeleitet.
+            Füge die aktuelle Website zu deinem Handy-Startbildschirm hinzu und aktiviere die Checkbox.<br />
+            Über das Icon auf dem Startbildschirm wirst du ab dann automatisch zum vorausgefüllten Formular
+            weitergeleitet.
         </p>
-        <label class="form-checkbox">
-            <input type="checkbox">
-            <i class="form-icon"></i> Beim nächsten Mal sofort weiterleiten
-        </label>
-        <button class="btn btn-primary" id="redirect">Zum Formular weiterleiten</button>
-        <!-- <button class="btn" id="copy">Link zum vorausgefüllten Formular kopieren</button>
-        <div style="margin-top: 1em; display: none;" class="toast toast-success" id="toast">Link kopiert!</div> -->
+        <p>
+            <label class="form-checkbox">
+                <input type="checkbox">
+                <i class="form-icon"></i> Beim nächsten Mal sofort weiterleiten
+            </label>
+            <button class="btn btn-primary" id="redirect">Zum Formular weiterleiten</button>
+        </p>
+        <p>
+            Solltest du in deinem Browser Cookies deaktiviert haben, drücke den folgenden Button, um den Link zum
+            vorausgefüllten Formular zu kopieren<br />
+            <button class="btn" id="copy">Direkten Link kopieren</button>
+        </p>
+        <div style="display: none;" class="toast toast-success" id="toast">Link kopiert!</div>
     </div>
 
     <script>
