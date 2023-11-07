@@ -14,7 +14,7 @@ const main = () => {
         const data = loadData();
 
         localStorage.setItem("data", JSON.stringify(data));
-        window.open("/redirect", "_self")
+        window.open("./redirect", "_self")
     });
     document.querySelector("#copy").addEventListener("click", evt => {
         evt.preventDefault();
