@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form action="">
+            <div class="form-group">
+                <label class="form-label" for="firstname">Vorname</label>
+                <input class="form-input" type="text" id="firstname" placeholder="Vorname">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="firstname">Nachname</label>
+                <input class="form-input" type="text" id="lastname" placeholder="Nachname">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="birthday">Geburtsdatum</label>
+                <input class="form-input" type="date" id="birthday" placeholder="01.01.2000">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Stimmgruppe</label>
+                <label class="form-radio">
+                    <input type="radio" name="voice-group" checked value="Sopran">
+                    <i class="form-icon"></i> Sopran
+                </label>
+                <label class="form-radio">
+                    <input type="radio" name="voice-group" value="Alt">
+                    <i class="form-icon"></i> Alt
+                </label>
+                <label class="form-radio">
+                    <input type="radio" name="voice-group" value="Tenor">
+                    <i class="form-icon"></i> Tenor
+                </label>
+                <label class="form-radio">
+                    <input type="radio" name="voice-group" value="Bass">
+                    <i class="form-icon"></i> Bass
+                </label>
+            </div>
+            <button class="btn btn-primary" id="submit">Bestätigen</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
