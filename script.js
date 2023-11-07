@@ -1,6 +1,6 @@
 const loadData = () => {
-    const firstname = document.querySelector("#firstname").value;
-    const lastname = document.querySelector("#lastname").value;
+    const firstname = document.querySelector("#firstname").value.trim();
+    const lastname = document.querySelector("#lastname").value.trim();
     const birthday = document.querySelector("#birthday").value;
     const voiceGroup = document.querySelector("input[name=voice-group]:checked").value;
 
@@ -14,7 +14,7 @@ const main = () => {
         const data = loadData();
 
         localStorage.setItem("data", JSON.stringify(data));
-        window.open("./redirect", "_self")
+        location.pathname += "redirect";
     });
     document.querySelector("#copy").addEventListener("click", evt => {
         evt.preventDefault();
