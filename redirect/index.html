@@ -5,9 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unichor Anwesenheitsliste: Weiterleitung</title>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
 </head>
 
 <body>
+    <div class="container" style="display:none">
+        <p>
+            Kopiere den Link dieser Seite und aktiviere die Checkbox.
+            Über den kopierten Link wirst du dann automatisch zum ausgefüllten Formular weitergeleitet.
+        </p>
+        <label class="form-checkbox">
+            <input type="checkbox">
+            <i class="form-icon"></i> Beim nächsten Mal sofort weiterleiten
+        </label>
+        <button class="btn btn-primary" id="redirect">Zum Formular weiterleiten</button>
+        <button class="btn" id="copy">Link zum vorausgefüllten Formular kopieren</button>
+        <div style="margin-top: 1em; display: none;" class="toast toast-success" id="toast">Link kopiert!</div>
+    </div>
+
     <script>
         // check if url contains GET paramter ?disable
 
@@ -17,9 +34,28 @@
         const data = JSON.parse(localStorage.getItem("data"));
         // example: https://docs.google.com/forms/d/e/1FAIpQLSexAQunwzbLiapgd0MPSxpqvvuH8msvc8CWK544I6ghlr-qMg/viewform?entry.1345550671=Name&entry.945327328=2023-09-11&entry.1445587767=Bass
         const url = `https://docs.google.com/forms/d/e/1FAIpQLSexAQunwzbLiapgd0MPSxpqvvuH8msvc8CWK544I6ghlr-qMg/viewform?entry.1345550671=${data.lastname},+${data.firstname}&entry.945327328=${data.birthday}&entry.1445587767=${data.voiceGroup}`;
-        if (!new URL(document.location).searchParams.has("disable")) {
-            // console.log("redirecting to " + url);
+
+        if (data.redirect) {
             window.open(url, "_self");
+        } else {
+            document.querySelector(".container").style.display = "block";
+            document.querySelector("#redirect").addEventListener("click", evt => {
+                evt.preventDefault();
+                const autoRedirect = document.querySelector("input[type=checkbox]").checked;
+                if (autoRedirect) {
+                    data.redirect = true;
+                    localStorage.setItem("data", JSON.stringify(data));
+                }
+                window.open(url, "_self");
+            });
+            document.querySelector("#copy").addEventListener("click", evt => {
+                evt.preventDefault();
+                // get form data
+                navigator.clipboard.writeText(url).then(() => {
+                    const toast = document.querySelector(".toast");
+                    toast.style.display = "block";
+                })
+            });
         }
     </script>
 </body>

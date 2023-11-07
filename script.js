@@ -8,12 +8,20 @@ const loadData = () => {
 }
 
 const main = () => {
+    const data = JSON.parse(localStorage.getItem("data"));
+    // autofill form
+    if (data) {
+        document.querySelector("#firstname").value = data.firstname;
+        document.querySelector("#lastname").value = data.lastname;
+        document.querySelector("#birthday").value = data.birthday;
+        document.querySelector(`input[value=${data.voiceGroup}]`).checked = true;
+    }
     document.querySelector("#submit").addEventListener("click", evt => {
         evt.preventDefault();
         // get form data
         const data = loadData();
 
-        localStorage.setItem("data", JSON.stringify(data));
+        localStorage.setItem("data", JSON.stringify({ ...data, redirect: false }));
         location.pathname += "redirect";
     });
     document.querySelector("#copy").addEventListener("click", evt => {
