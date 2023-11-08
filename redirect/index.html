@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unichor Anwesenheitsliste: Weiterleitung</title>
+    <title>Unichor Anwesenheitsliste</title>
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
@@ -13,23 +13,14 @@
 <body>
     <div class="container" style="display:none">
         <p>
-            Füge diese Website zu deinem Handy-Startbildschirm hinzu und aktiviere die Checkbox.<br />
-            Über das Icon auf dem Startbildschirm wirst du ab dann automatisch zum vorausgefüllten Formular
-            weitergeleitet.
+            Füge diese Website zu deinem Handy-Startbildschirm hinzu. Über das Icon auf dem Startbildschirm wirst du
+            automatisch zum vorausgefüllten Google-Formular weitergeleitet.
         </p>
-        <p>
-            <label class="form-checkbox">
-                <input type="checkbox">
-                <i class="form-icon"></i> Beim nächsten Mal sofort weiterleiten
-            </label>
-            <button class="btn btn-primary" id="redirect">Zum Formular weiterleiten</button>
-        </p>
-        <p>
-            Solltest du in deinem Browser Cookies deaktiviert haben, drücke den folgenden Button, um den Link zum
-            vorausgefüllten Formular zu kopieren<br />
-            <button class="btn" id="copy">Direkten Link kopieren</button>
-        </p>
+        <p>Alternativ kannst du auch <a id="copy" href="#">diesen Link</a> kopieren.</p>
         <div style="display: none;" class="toast toast-success" id="toast">Link kopiert!</div>
+        <!-- <p>
+            <button class="btn btn-primary" id="redirect">Zum Formular</button>
+        </p> -->
     </div>
 
     <script>
@@ -49,32 +40,17 @@
         const url = `https://docs.google.com/forms/d/e/1FAIpQLSexAQunwzbLiapgd0MPSxpqvvuH8msvc8CWK544I6ghlr-qMg/viewform?entry.1345550671=${data.lastname},+${data.firstname}&entry.945327328=${data.birthday}&entry.1445587767=${data.voiceGroup}&emailAddress=${data.email}`;
         if (data.redirect) {
             window.open(url, "_self");
+        } else {
+            document.querySelector(".container").style.display = "block";
         }
-        // const data = JSON.parse(localStorage.getItem("data"));
-        // // example: https://docs.google.com/forms/d/e/1FAIpQLSexAQunwzbLiapgd0MPSxpqvvuH8msvc8CWK544I6ghlr-qMg/viewform?entry.1345550671=Name&entry.945327328=2023-09-11&entry.1445587767=Bass
-
-        // if (data.redirect) {
-        //     window.open(url, "_self");
-        // } else {
-        //     document.querySelector(".container").style.display = "block";
-        //     document.querySelector("#redirect").addEventListener("click", evt => {
-        //         evt.preventDefault();
-        //         const autoRedirect = document.querySelector("input[type=checkbox]").checked;
-        //         if (autoRedirect) {
-        //             data.redirect = true;
-        //             localStorage.setItem("data", JSON.stringify(data));
-        //         }
-        //         window.open(url, "_self");
-        //     });
-        //     document.querySelector("#copy").addEventListener("click", evt => {
-        //         evt.preventDefault();
-        //         // get form data
-        //         navigator.clipboard.writeText(url).then(() => {
-        //             const toast = document.querySelector(".toast");
-        //             toast.style.display = "block";
-        //         })
-        //     });
-        // }
+        document.querySelector("#copy").addEventListener("click", evt => {
+            evt.preventDefault();
+            // get form data
+            navigator.clipboard.writeText(url).then(() => {
+                const toast = document.querySelector(".toast");
+                toast.style.display = "block";
+            })
+        });
     </script>
 </body>
 
