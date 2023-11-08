@@ -24,7 +24,15 @@ const main = () => {
         const data = loadData();
 
         localStorage.setItem("data", JSON.stringify({ ...data, redirect: false }));
-        location.pathname += "redirect";
+
+        const params = new URLSearchParams(window.location.search);
+        params.set("email", data.email);
+        params.set("firstname", data.firstname);
+        params.set("lastname", data.lastname);
+        params.set("birthday", data.birthday);
+        params.set("voiceGroup", data.voiceGroup);
+        window.open(location.pathname + "redirect/?" + params.toString(), "_self");
+        // location.pathname += "redirect/?" + params.toString();
     });
     // document.querySelector("#copy").addEventListener("click", evt => {
     //     evt.preventDefault();

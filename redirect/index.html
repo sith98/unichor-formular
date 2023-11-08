@@ -13,7 +13,7 @@
 <body>
     <div class="container" style="display:none">
         <p>
-            Füge die aktuelle Website zu deinem Handy-Startbildschirm hinzu und aktiviere die Checkbox.<br />
+            Füge diese Website zu deinem Handy-Startbildschirm hinzu und aktiviere die Checkbox.<br />
             Über das Icon auf dem Startbildschirm wirst du ab dann automatisch zum vorausgefüllten Formular
             weitergeleitet.
         </p>
@@ -33,37 +33,48 @@
     </div>
 
     <script>
-        // check if url contains GET paramter ?disable
+        // get search params
+        const urlParams = new URLSearchParams(window.location.search);
+        const data = {
+            email: urlParams.get("email"),
+            firstname: urlParams.get("firstname"),
+            lastname: urlParams.get("lastname"),
+            birthday: urlParams.get("birthday"),
+            voiceGroup: urlParams.get("voiceGroup"),
+            redirect: urlParams.get("redirect") == "true"
+        };
+        urlParams.set("redirect", "true");
+        history.replaceState(null, null, "?" + urlParams.toString());
 
-        if (localStorage.getItem("data") == null) {
-            window.open("/", "_self");
-        }
-        const data = JSON.parse(localStorage.getItem("data"));
-        // example: https://docs.google.com/forms/d/e/1FAIpQLSexAQunwzbLiapgd0MPSxpqvvuH8msvc8CWK544I6ghlr-qMg/viewform?entry.1345550671=Name&entry.945327328=2023-09-11&entry.1445587767=Bass
         const url = `https://docs.google.com/forms/d/e/1FAIpQLSexAQunwzbLiapgd0MPSxpqvvuH8msvc8CWK544I6ghlr-qMg/viewform?entry.1345550671=${data.lastname},+${data.firstname}&entry.945327328=${data.birthday}&entry.1445587767=${data.voiceGroup}&emailAddress=${data.email}`;
-
         if (data.redirect) {
             window.open(url, "_self");
-        } else {
-            document.querySelector(".container").style.display = "block";
-            document.querySelector("#redirect").addEventListener("click", evt => {
-                evt.preventDefault();
-                const autoRedirect = document.querySelector("input[type=checkbox]").checked;
-                if (autoRedirect) {
-                    data.redirect = true;
-                    localStorage.setItem("data", JSON.stringify(data));
-                }
-                window.open(url, "_self");
-            });
-            document.querySelector("#copy").addEventListener("click", evt => {
-                evt.preventDefault();
-                // get form data
-                navigator.clipboard.writeText(url).then(() => {
-                    const toast = document.querySelector(".toast");
-                    toast.style.display = "block";
-                })
-            });
         }
+        // const data = JSON.parse(localStorage.getItem("data"));
+        // // example: https://docs.google.com/forms/d/e/1FAIpQLSexAQunwzbLiapgd0MPSxpqvvuH8msvc8CWK544I6ghlr-qMg/viewform?entry.1345550671=Name&entry.945327328=2023-09-11&entry.1445587767=Bass
+
+        // if (data.redirect) {
+        //     window.open(url, "_self");
+        // } else {
+        //     document.querySelector(".container").style.display = "block";
+        //     document.querySelector("#redirect").addEventListener("click", evt => {
+        //         evt.preventDefault();
+        //         const autoRedirect = document.querySelector("input[type=checkbox]").checked;
+        //         if (autoRedirect) {
+        //             data.redirect = true;
+        //             localStorage.setItem("data", JSON.stringify(data));
+        //         }
+        //         window.open(url, "_self");
+        //     });
+        //     document.querySelector("#copy").addEventListener("click", evt => {
+        //         evt.preventDefault();
+        //         // get form data
+        //         navigator.clipboard.writeText(url).then(() => {
+        //             const toast = document.querySelector(".toast");
+        //             toast.style.display = "block";
+        //         })
+        //     });
+        // }
     </script>
 </body>
 
