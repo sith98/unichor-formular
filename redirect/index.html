@@ -37,7 +37,7 @@
         urlParams.set("redirect", "true");
         history.replaceState(null, null, "?" + urlParams.toString());
 
-        const url = `https://docs.google.com/forms/d/e/1FAIpQLSexAQunwzbLiapgd0MPSxpqvvuH8msvc8CWK544I6ghlr-qMg/viewform?entry.1345550671=${data.lastname},+${data.firstname}&entry.945327328=${data.birthday}&entry.1445587767=${data.voiceGroup}&emailAddress=${data.email}`;
+        const url = `https://docs.google.com/forms/d/e/1FAIpQLSev6IAAVDmq-HVtv0IVmNI9lD5m6bjyIZxAPTdPplz89dHVIQ/viewform?entry.1345550671=${data.lastname},+${data.firstname}&entry.945327328=${data.birthday}&entry.1445587767=${data.voiceGroup}&emailAddress=${data.email}`;
         document.querySelector("#copy").href = url
         if (data.redirect) {
             window.open(url, "_self");
